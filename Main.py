@@ -7,6 +7,7 @@ from tkinter import filedialog
 from tkinter import messagebox
 import threading
 from exercise_selector import ExerciseSelector
+import sys
 
 mp_pose = mp.solutions.pose
 
@@ -283,14 +284,16 @@ def track_pose(exercise_type, video_source, root):
         root.destroy()
 
 if __name__ == "__main__":
-    root = tk.Tk()  # Crie a janela principal
-    app = ExerciseSelector(root)  # Crie a instância do seletor de exercício
-    root.mainloop()  # Inicie o loop de eventos da janela
-
-    if app.exercise_type:
-        exercise_type = app.exercise_type
-        using_webcam = True 
+    if len(sys.argv) != 3:
+        print("Usage: python main.py <exercise_type> <root>")
+        sys.exit(1)
+    
+    exercise_type = sys.argv[1]
+    root = sys.argv[2]
+    
+    using_webcam = True  # Fonte de vídeo é sempre webcam
+    track_pose(exercise_type, using_webcam, root)
 
         # Inicie o rastreamento de vídeo em um thread separado
-        tracking_thread = threading.Thread(target=track_pose, args=(exercise_type, using_webcam, root))
-        tracking_thread.start()
+    tracking_thread = threading.Thread(target=track_pose, args=(exercise_type, using_webcam, root))
+    tracking_thread.start()

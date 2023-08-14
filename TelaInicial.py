@@ -1,9 +1,13 @@
 from tkinter import *
-
+import subprocess
 
 def btn_clicked():
     print("Button Clicked")
 
+def btn_clicked_img4():
+
+    subprocess.call(["python", "Selecao.py"])
+    window.destroy()
 
 window = Tk()
 
@@ -99,7 +103,7 @@ b4 = Button(
     image = img4,
     borderwidth = 0,
     highlightthickness = 0,
-    command = btn_clicked,
+    command = btn_clicked_img4,
     relief = "flat")
 
 b4.place(
