@@ -21,11 +21,11 @@ canvas.place(x = 0, y = 0)
 
 background_img = PhotoImage(file = f"images/background.png")
 background = canvas.create_image(
-    963.5, 540.5,
+    960.0, 540.0,
     image=background_img)
 
 canvas.create_text(
-    1801.0, 265.0,
+    1800.0, 259.0,
     text = "Conecte ao Facebook",
     fill = "#ffffff",
     font = ("Cabin-Bold", int(15.0)))
@@ -64,9 +64,9 @@ b1 = Button(
     relief = "flat")
 
 b1.place(
-    x = 30, y = 1019,
-    width = 22,
-    height = 23)
+    x = 30, y = 1024,
+    width = 27,
+    height = 27)
 
 img2 = PhotoImage(file = f"images/img2.png")
 b2 = Button(
@@ -90,9 +90,9 @@ b3 = Button(
     relief = "flat")
 
 b3.place(
-    x = 115, y = 116,
-    width = 321,
-    height = 209)
+    x = 29, y = 22,
+    width = 28,
+    height = 28)
 
 img4 = PhotoImage(file = f"images/img4.png")
 b4 = Button(
@@ -103,9 +103,9 @@ b4 = Button(
     relief = "flat")
 
 b4.place(
-    x = 19, y = 12,
-    width = 48,
-    height = 48)
+    x = 116, y = 101,
+    width = 323,
+    height = 211)
 
 img5 = PhotoImage(file = f"images/img5.png")
 b5 = Button(
@@ -116,8 +116,8 @@ b5 = Button(
     relief = "flat")
 
 b5.place(
-    x = 1764, y = 104,
-    width = 74,
+    x = 1754, y = 103,
+    width = 86,
     height = 86)
 
 img6 = PhotoImage(file = f"images/img6.png")
