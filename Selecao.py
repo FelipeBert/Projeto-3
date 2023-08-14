@@ -1,44 +1,73 @@
 from tkinter import *
 import subprocess
+import threading
 
 def btn_clicked():
     print("Button Clicked")
 
 def btn_clicked_home():
+    def run_script():
+        subprocess.call(["python", "TelaInicial.py"])
 
-    subprocess.call(["python", "TelaInicial.py"])
+    thread = threading.Thread(target=run_script)
+    thread.start()
+
     window.destroy()
 
 def btn_clicked_img15():
-    exercise_type = "push-up"  # Defina o tipo de exercício
-    root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+    def run_script():       
+        exercise_type = "push-up"  # Defina o tipo de exercício
+        root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+        subprocess.call(["python", "main.py", exercise_type, root_value])
 
-    subprocess.call(["python", "main.py", exercise_type, root_value])
+    thread = threading.Thread(target=run_script)
+    thread.start()
+
+    window.destroy()
 
 def btn_clicked_img14():
-    exercise_type = "sit-up"  # Defina o tipo de exercício
-    root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+    def run_script():       
+        exercise_type = "sit-up"  # Defina o tipo de exercício
+        root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+        subprocess.call(["python", "main.py", exercise_type, root_value])
 
-    subprocess.call(["python", "main.py", exercise_type, root_value])
+    thread = threading.Thread(target=run_script)
+    thread.start()
+
+    window.destroy()
 
 def btn_clicked_img13():
-    exercise_type = "squat"  # Defina o tipo de exercício
-    root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+    def run_script():       
+        exercise_type = "squat"  # Defina o tipo de exercício
+        root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+        subprocess.call(["python", "main.py", exercise_type, root_value])
 
-    subprocess.call(["python", "main.py", exercise_type, root_value])
+    thread = threading.Thread(target=run_script)
+    thread.start()
+
+    window.destroy()
 
 def btn_clicked_img7():
-    exercise_type = "walk"  # Defina o tipo de exercício
-    root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+    def run_script():       
+        exercise_type = "walk"  # Defina o tipo de exercício
+        root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+        subprocess.call(["python", "main.py", exercise_type, root_value])
 
-    subprocess.call(["python", "main.py", exercise_type, root_value])
+    thread = threading.Thread(target=run_script)
+    thread.start()
+
+    window.destroy()
 
 def btn_clicked_img8():
-    exercise_type = "pull-up"  # Defina o tipo de exercício
-    root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+    def run_script():       
+        exercise_type = "pull-up"  # Defina o tipo de exercício
+        root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+        subprocess.call(["python", "main.py", exercise_type, root_value])
 
-    subprocess.call(["python", "main.py", exercise_type, root_value])
+    thread = threading.Thread(target=run_script)
+    thread.start()
 
+    window.destroy()
 
 window = Tk()
 

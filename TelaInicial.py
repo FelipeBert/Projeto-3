@@ -1,12 +1,17 @@
 from tkinter import *
 import subprocess
+import threading
 
 def btn_clicked():
     print("Button Clicked")
 
 def btn_clicked_img4():
+    def run_script():
+        subprocess.call(["python", "Selecao.py"])
 
-    subprocess.call(["python", "Selecao.py"])
+    thread = threading.Thread(target=run_script)
+    thread.start()
+
     window.destroy()
 
 window = Tk()
