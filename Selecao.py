@@ -1,8 +1,43 @@
 from tkinter import *
-
+import subprocess
 
 def btn_clicked():
     print("Button Clicked")
+
+def btn_clicked_home():
+
+    subprocess.call(["python", "TelaInicial.py"])
+    window.destroy()
+
+def btn_clicked_img15():
+    exercise_type = "push-up"  # Defina o tipo de exercício
+    root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+
+    subprocess.call(["python", "main.py", exercise_type, root_value])
+
+def btn_clicked_img14():
+    exercise_type = "sit-up"  # Defina o tipo de exercício
+    root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+
+    subprocess.call(["python", "main.py", exercise_type, root_value])
+
+def btn_clicked_img13():
+    exercise_type = "squat"  # Defina o tipo de exercício
+    root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+
+    subprocess.call(["python", "main.py", exercise_type, root_value])
+
+def btn_clicked_img7():
+    exercise_type = "walk"  # Defina o tipo de exercício
+    root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+
+    subprocess.call(["python", "main.py", exercise_type, root_value])
+
+def btn_clicked_img8():
+    exercise_type = "pull-up"  # Defina o tipo de exercício
+    root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+
+    subprocess.call(["python", "main.py", exercise_type, root_value])
 
 
 window = Tk()
@@ -35,7 +70,7 @@ b0 = Button(
     image = img0,
     borderwidth = 0,
     highlightthickness = 0,
-    command = btn_clicked,
+    command = btn_clicked_home,
     relief = "flat")
 
 b0.place(
@@ -87,7 +122,7 @@ b4 = Button(
     image = img4,
     borderwidth = 0,
     highlightthickness = 0,
-    command = btn_clicked,
+    command = btn_clicked_img13,
     relief = "flat")
 
 b4.place(
@@ -100,7 +135,7 @@ b5 = Button(
     image = img5,
     borderwidth = 0,
     highlightthickness = 0,
-    command = btn_clicked,
+    command = btn_clicked_img14,
     relief = "flat")
 
 b5.place(
@@ -113,7 +148,7 @@ b6 = Button(
     image = img6,
     borderwidth = 0,
     highlightthickness = 0,
-    command = btn_clicked,
+    command = btn_clicked_img15,
     relief = "flat")
 
 b6.place(
@@ -126,7 +161,7 @@ b7 = Button(
     image = img7,
     borderwidth = 0,
     highlightthickness = 0,
-    command = btn_clicked,
+    command = btn_clicked_img7,
     relief = "flat")
 
 b7.place(
@@ -139,7 +174,7 @@ b8 = Button(
     image = img8,
     borderwidth = 0,
     highlightthickness = 0,
-    command = btn_clicked,
+    command = btn_clicked_img8,
     relief = "flat")
 
 b8.place(
