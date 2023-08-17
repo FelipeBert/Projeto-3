@@ -6,7 +6,6 @@ import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
 import threading
-from exercise_selector import ExerciseSelector
 import sys
 
 mp_pose = mp.solutions.pose
