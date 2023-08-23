@@ -1,9 +1,13 @@
 from tkinter import *
 
-
 def btn_clicked():
-    print("Button Clicked")
+    print("Botão Clicado")
 
+def destacar_botao(event):
+    event.widget.config(bg="gray", cursor="hand2")
+
+def remover_destaque_botao(event):
+    event.widget.config(bg="SystemButtonFace", cursor="arrow")
 
 window = Tk()
 
@@ -106,6 +110,12 @@ canvas.create_text(
     text = "Atividade: Flexão",
     fill = "#ffffff",
     font = ("Cabin-Regular", int(64.0)))
+
+botoes = [b0, b1, b2, b3, b4]
+
+for botao in botoes:
+    botao.bind("<Enter>", destacar_botao)
+    botao.bind("<Leave>", remover_destaque_botao)
 
 window.resizable(False, False)
 window.mainloop()
