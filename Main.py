@@ -9,6 +9,7 @@ import threading
 import sys
 
 mp_pose = mp.solutions.pose
+color = (0, 0, 255)
 
 class BodyPartAngle:
     def __init__(self, landmarks):
@@ -130,6 +131,7 @@ class TypeOfExercise(BodyPartAngle):
 class TypeOfExercise(BodyPartAngle):
         
     def push_up(self, counter, status):
+        global color
         left_arm_angle = self.angle_of_the_left_arm()
         right_arm_angle = self.angle_of_the_left_arm()
         avg_arm_angle = (left_arm_angle + right_arm_angle) // 2
@@ -137,14 +139,17 @@ class TypeOfExercise(BodyPartAngle):
         if status:
             if avg_arm_angle < 70:
                 counter += 1
+                color = (255, 0, 0)
                 status = False
         else:
             if avg_arm_angle > 160:
+                color = (0, 0, 255)
                 status = True
 
         return [counter, status]
 
     def pull_up(self, counter, status):
+        global color
         nose = detection_body_part(self.landmarks, "NOSE")
         left_elbow = detection_body_part(self.landmarks, "LEFT_ELBOW")
         right_elbow = detection_body_part(self.landmarks, "RIGHT_ELBOW")
@@ -153,15 +158,18 @@ class TypeOfExercise(BodyPartAngle):
         if status:
             if nose[1] > avg_shoulder_y:
                 counter += 1
+                color = (255, 0, 0)
                 status = False
 
         else:
             if nose[1] < avg_shoulder_y:
+                color = (0, 0, 255)
                 status = True
 
         return [counter, status]
 
     def squat(self, counter, status):
+        global color
         left_leg_angle = self.angle_of_the_right_leg()
         right_leg_angle = self.angle_of_the_left_leg()
         avg_leg_angle = (left_leg_angle + right_leg_angle) // 2
@@ -169,37 +177,45 @@ class TypeOfExercise(BodyPartAngle):
         if status:
             if avg_leg_angle < 70:
                 counter += 1
+                color = (255, 0, 0)
                 status = False
         else:
             if avg_leg_angle > 160:
+                color = (0, 0, 255)
                 status = True
 
         return [counter, status]
 
     def walk(self, counter, status):
+        global color
         right_knee = detection_body_part(self.landmarks, "RIGHT_KNEE")
         left_knee = detection_body_part(self.landmarks, "LEFT_KNEE")
 
         if status:
             if left_knee[0] > right_knee[0]:
                 counter += 1
+                color = (255, 0, 0)
                 status = False
 
         else:
             if left_knee[0] < right_knee[0]:
+                color = (0, 0, 255)
                 counter += 1
                 status = True
 
         return [counter, status]
 
     def sit_up(self, counter, status):
+        global color
         angle = self.angle_of_the_abdomen()
         if status:
             if angle < 55:
                 counter += 1
+                color = (255, 0, 0)
                 status = False
         else:
             if angle > 105:
+                color = (0, 0, 255)
                 status = True
 
         return [counter, status]
@@ -253,22 +269,23 @@ def track_pose(exercise_type, video_source, root):
                     landmarks = results.pose_landmarks.landmark
                     counter, status = TypeOfExercise(landmarks).calculate_exercise(
                         exercise_type, counter, status)
+                    
                 except:
                     pass
 
                 score_table(exercise_type, counter, status)
 
                 mp_drawing.draw_landmarks(
-                    frame,
-                    results.pose_landmarks,
-                    mp_pose.POSE_CONNECTIONS,
-                    mp_drawing.DrawingSpec(color=(255, 255, 255),
-                                           thickness=2,
-                                           circle_radius=2),
-                    mp_drawing.DrawingSpec(color=(174, 139, 45),
-                                           thickness=2,
-                                           circle_radius=2),
-                )
+            frame,
+            results.pose_landmarks,
+            mp_pose.POSE_CONNECTIONS,
+            mp_drawing.DrawingSpec(color=(255, 0, 0),  # Verifique se está em vermelho
+                                   thickness=2,
+                                   circle_radius=2),
+            mp_drawing.DrawingSpec(color=color,  # Verifique se está em azul
+                                   thickness=2,
+                                   circle_radius=2),
+        )
 
                 cv2.imshow('Video', frame)
                 if cv2.waitKey(10) & 0xFF == ord('q'):
