@@ -3,7 +3,7 @@ import subprocess
 import threading
 
 def btn_clicked():
-    print("Button Clicked")
+    print("Botão Clicado")
 
 def btn_clicked_img4():
     def run_script():
@@ -13,6 +13,12 @@ def btn_clicked_img4():
     thread.start()
 
     window.destroy()
+
+def destacar_botao(event):
+    event.widget.config(bg="gray", cursor="hand2")
+
+def remover_destaque_botao(event):
+    event.widget.config(bg="SystemButtonFace", cursor="arrow")
 
 window = Tk()
 
@@ -141,6 +147,12 @@ b6.place(
     x = 1773, y = 733,
     width = 55,
     height = 39)
+
+botoes = [b0, b1, b2, b3, b4, b5, b6]
+
+for botao in botoes:
+    botao.bind("<Enter>", destacar_botao)
+    botao.bind("<Leave>", remover_destaque_botao)
 
 window.resizable(False, False)
 window.mainloop()

@@ -3,7 +3,7 @@ import subprocess
 import threading
 
 def btn_clicked():
-    print("Button Clicked")
+    print("Botão Clicado")
 
 def btn_clicked_home():
     def run_script():
@@ -15,9 +15,9 @@ def btn_clicked_home():
     window.destroy()
 
 def btn_clicked_img15():
-    def run_script():       
-        exercise_type = "push-up"  # Defina o tipo de exercício
-        root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+    def run_script():
+        exercise_type = "push-up"
+        root_value = "root_value"
         subprocess.call(["python", "main.py", exercise_type, root_value])
 
     thread = threading.Thread(target=run_script)
@@ -26,9 +26,9 @@ def btn_clicked_img15():
     window.destroy()
 
 def btn_clicked_img14():
-    def run_script():       
-        exercise_type = "sit-up"  # Defina o tipo de exercício
-        root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+    def run_script():
+        exercise_type = "sit-up"
+        root_value = "root_value"
         subprocess.call(["python", "main.py", exercise_type, root_value])
 
     thread = threading.Thread(target=run_script)
@@ -37,9 +37,9 @@ def btn_clicked_img14():
     window.destroy()
 
 def btn_clicked_img13():
-    def run_script():       
-        exercise_type = "squat"  # Defina o tipo de exercício
-        root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+    def run_script():
+        exercise_type = "squat"
+        root_value = "root_value"
         subprocess.call(["python", "main.py", exercise_type, root_value])
 
     thread = threading.Thread(target=run_script)
@@ -48,9 +48,9 @@ def btn_clicked_img13():
     window.destroy()
 
 def btn_clicked_img7():
-    def run_script():       
-        exercise_type = "walk"  # Defina o tipo de exercício
-        root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+    def run_script():
+        exercise_type = "walk"
+        root_value = "root_value"
         subprocess.call(["python", "main.py", exercise_type, root_value])
 
     thread = threading.Thread(target=run_script)
@@ -59,15 +59,21 @@ def btn_clicked_img7():
     window.destroy()
 
 def btn_clicked_img8():
-    def run_script():       
-        exercise_type = "pull-up"  # Defina o tipo de exercício
-        root_value = "root_value"  # Defina o valor da janela raiz do Tkinter
+    def run_script():
+        exercise_type = "pull-up"
+        root_value = "root_value"
         subprocess.call(["python", "main.py", exercise_type, root_value])
 
     thread = threading.Thread(target=run_script)
     thread.start()
 
     window.destroy()
+
+def destacar_botao(event):
+    event.widget.config(bg="gray", cursor="hand2")
+
+def remover_destaque_botao(event):
+    event.widget.config(bg="SystemButtonFace", cursor="arrow")
 
 window = Tk()
 
@@ -210,6 +216,12 @@ b8.place(
     x = 710, y = 583,
     width = 591,
     height = 387)
+
+botoes = [b0, b1, b2, b3, b4, b5, b6, b7, b8]
+
+for botao in botoes:
+    botao.bind("<Enter>", destacar_botao)
+    botao.bind("<Leave>", remover_destaque_botao)
 
 window.resizable(False, False)
 window.mainloop()
