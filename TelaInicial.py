@@ -1,3 +1,4 @@
+import tkinter as tk
 from tkinter import *
 import subprocess
 import threading
@@ -20,42 +21,33 @@ def destacar_botao(event):
 def remover_destaque_botao(event):
     event.widget.config(bg="SystemButtonFace", cursor="arrow")
 
-window = Tk()
-
-window.geometry("1920x1080")
-window.configure(bg = "#FFFFFF")
-canvas = Canvas(
-    window,
-    bg = "#FFFFFF",
-    height = 1080,
-    width = 1920,
-    bd = 0,
-    highlightthickness = 0,
-    relief = "ridge")
-canvas.place(x = 0, y = 0)
+window = tk.Tk()
+width= window.winfo_screenwidth()  
+height= window.winfo_screenheight() 
+window.geometry("%dx%d" % (width, height)) 
+window.title("Shape Motion")
+window.iconbitmap("images/ShapeMotion.ico")
 
 background_img = PhotoImage(file = f"images/background.png")
-background = canvas.create_image(
-    960.0, 540.0,
-    image=background_img)
+label_background = Label(window, image=background_img).pack()
 
-canvas.create_text(
-    1800.0, 259.0,
-    text = "Conecte ao Facebook",
-    fill = "#ffffff",
-    font = ("Cabin-Bold", int(15.0)))
+textUpChallenger = tk.Label(
+    window,
+    font=("Cabin-Bold", int(18.0)),
+    text="Em Breve",
+    background="#1c1c1c",
+    foreground="#ffffff"
+    )
+textUpChallenger.place(x=96,y=350)
 
-canvas.create_text(
-    173.5, 553.5,
-    text = "Em Breve\n",
-    fill = "#ffffff",
-    font = ("Cabin-Bold", int(22.0)))
-
-canvas.create_text(
-    186.0, 63.0,
-    text = "Comunidade\n",
-    fill = "#ffffff",
-    font = ("Cabin-Bold", int(22.0)))
+textCommunity = tk.Label(
+    window,
+    font=("Cabin-Bold", int(18.0)),
+    text="Comunidade",
+    background="#1c1c1c",
+    foreground="#ffffff"
+    )
+textCommunity.place(x=96,y=50)
 
 img0 = PhotoImage(file = f"images/img0.png")
 b0 = Button(
@@ -66,8 +58,8 @@ b0 = Button(
     relief = "flat")
 
 b0.place(
-    x = 30, y = 175,
-    width = 27,
+    x = 20, y = 175,
+    width = 28.5,
     height = 27)
 
 img1 = PhotoImage(file = f"images/img1.png")
@@ -79,9 +71,10 @@ b1 = Button(
     relief = "flat")
 
 b1.place(
-    x = 30, y = 1024,
-    width = 27,
-    height = 27)
+    x = 7, y = 670,
+    width=45,
+    height=30
+    )
 
 img2 = PhotoImage(file = f"images/img2.png")
 b2 = Button(
@@ -92,7 +85,7 @@ b2 = Button(
     relief = "flat")
 
 b2.place(
-    x = 29, y = 97,
+    x = 19, y = 97,
     width = 28,
     height = 28)
 
@@ -105,7 +98,7 @@ b3 = Button(
     relief = "flat")
 
 b3.place(
-    x = 29, y = 22,
+    x = 20, y = 22,
     width = 28,
     height = 28)
 
@@ -118,9 +111,11 @@ b4 = Button(
     relief = "flat")
 
 b4.place(
-    x = 116, y = 101,
-    width = 323,
-    height = 211)
+    x = 67,
+    y = 96,
+    width=300,
+    height=200
+)
 
 img5 = PhotoImage(file = f"images/img5.png")
 b5 = Button(
@@ -154,5 +149,4 @@ for botao in botoes:
     botao.bind("<Enter>", destacar_botao)
     botao.bind("<Leave>", remover_destaque_botao)
 
-window.resizable(False, False)
 window.mainloop()
