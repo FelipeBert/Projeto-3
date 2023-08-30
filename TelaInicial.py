@@ -1,25 +1,6 @@
 import tkinter as tk
 from tkinter import *
-import subprocess
-import threading
-
-def btn_clicked():
-    print("Botão Clicado")
-
-def btn_clicked_img4():
-    def run_script():
-        subprocess.call(["python", "Selecao.py"])
-
-    thread = threading.Thread(target=run_script)
-    thread.start()
-
-    window.destroy()
-
-def destacar_botao(event):
-    event.widget.config(bg="gray", cursor="hand2")
-
-def remover_destaque_botao(event):
-    event.widget.config(bg="SystemButtonFace", cursor="arrow")
+import Selecao
 
 window = tk.Tk()
 width= window.winfo_screenwidth()  
@@ -27,6 +8,18 @@ height= window.winfo_screenheight()
 window.geometry("%dx%d" % (width, height)) 
 window.title("Shape Motion")
 window.iconbitmap("images/ShapeMotion.ico")
+
+def btn_clicked():
+    print("Botão Clicado")
+
+def btn_clicked_img4():
+    Selecao.init(window)
+
+def destacar_botao(event):
+    event.widget.config(bg="gray", cursor="hand2")
+
+def remover_destaque_botao(event):
+    event.widget.config(bg="SystemButtonFace", cursor="arrow")
 
 background_img = PhotoImage(file = f"images/background.png")
 label_background = Label(window, image=background_img).pack()
