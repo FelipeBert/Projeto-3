@@ -1,3 +1,6 @@
+import tkinter as tk
+from tkinter import *
+import threading
 import numpy as np
 import cv2
 import mediapipe as mp
@@ -5,11 +8,347 @@ from PIL import Image, ImageTk
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
-import threading
 import sys
 
 mp_pose = mp.solutions.pose
 color = (0, 0, 255)
+
+window = tk.Tk()
+
+def init(window):
+    width= window.winfo_screenwidth()  
+    height= window.winfo_screenheight() 
+    window.geometry("%dx%d" % (width, height)) 
+    window.title("Shape Motion")
+    window.iconbitmap("images/ShapeMotion.ico")
+    background_img = PhotoImage(file = f"images/background.png")
+    label_background = Label(window, image=background_img).pack()
+
+    textUpChallenger = tk.Label(
+        window,
+        font=("Cabin-Bold", int(18.0)),
+        text="Em Breve",
+        background="#1c1c1c",
+        foreground="#ffffff"
+        )
+    textUpChallenger.place(x=96,y=350)
+
+    textCommunity = tk.Label(
+        window,
+        font=("Cabin-Bold", int(18.0)),
+        text="Comunidade",
+        background="#1c1c1c",
+        foreground="#ffffff"
+        )
+    textCommunity.place(x=96,y=50)
+
+    img0 = PhotoImage(file = f"images/img0.png")
+    b0 = Button(
+        image = img0,
+        borderwidth = 0,
+        highlightthickness = 0,
+        command = btn_clicked,
+        relief = "flat")
+
+    b0.place(
+        x = 20, y = 175,
+        width = 28.5,
+        height = 27)
+
+    img1 = PhotoImage(file = f"images/img1.png")
+    b1 = Button(
+        image = img1,
+        borderwidth = 0,
+        highlightthickness = 0,
+        command = btn_clicked,
+        relief = "flat")
+
+    b1.place(
+        x = 7, y = 670,
+        width=45,
+        height=30
+        )
+
+    img2 = PhotoImage(file = f"images/img2.png")
+    b2 = Button(
+        image = img2,
+        borderwidth = 0,
+        highlightthickness = 0,
+        command = btn_clicked,
+        relief = "flat")
+
+    b2.place(
+        x = 19, y = 97,
+        width = 28,
+        height = 28)
+
+    img3 = PhotoImage(file = f"images/img3.png")
+    b3 = Button(
+        image = img3,
+        borderwidth = 0,
+        highlightthickness = 0,
+        command = lambda: btn_clicked_home(window),
+        relief = "flat")
+
+    b3.place(
+        x = 20, y = 22,
+        width = 28,
+        height = 28)
+
+    img4 = PhotoImage(file = f"images/img4.png")
+    b4 = Button(
+        image = img4,
+        borderwidth = 0,
+        highlightthickness = 0,
+        command = btn_clicked_img4,
+        relief = "flat")
+
+    b4.place(
+        x = 67,
+        y = 96,
+        width=300,
+        height=200
+    )
+
+    img5 = PhotoImage(file = f"images/img5.png")
+    b5 = Button(
+        image = img5,
+        borderwidth = 0,
+        highlightthickness = 0,
+        command = btn_clicked,
+        relief = "flat")
+
+    b5.place(
+        x = 1754, y = 103,
+        width = 86,
+        height = 86)
+
+    img6 = PhotoImage(file = f"images/img6.png")
+    b6 = Button(
+        image = img6,
+        borderwidth = 0,
+        highlightthickness = 0,
+        command = btn_clicked,
+        relief = "flat")
+
+    b6.place(
+        x = 1773, y = 733,
+        width = 55,
+        height = 39)
+
+    botoes = [b0, b1, b2, b3, b4, b5, b6]
+
+    for botao in botoes:
+        botao.bind("<Enter>", destacar_botao)
+        botao.bind("<Leave>", remover_destaque_botao)
+
+    window.mainloop()
+
+def btn_clicked():
+    print("Botão Clicado")
+
+def btn_clicked_img4():
+    selecao(window)
+
+def btn_clicked_home(window):
+    for widget in window.winfo_children():
+        widget.destroy()
+    init(window)
+
+def selecao(window):
+    for widget in window.winfo_children():
+        widget.destroy()
+
+    width= window.winfo_screenwidth()  
+    height= window.winfo_screenheight() 
+    window.geometry("%dx%d" % (width, height)) 
+    window.title("Shape Motion")
+    window.iconbitmap("images/ShapeMotion.ico")
+
+    background2_img = PhotoImage(file = f"images/background2.png")
+    label_background2 = Label(window, image=background2_img).pack()
+
+    textSelecExer = tk.Label(
+        window,
+        font=("Cabin-Bold", int(25.0)),
+        text="Selecine seu exercicio:",
+        background="#1c1c1c",
+        foreground="#ffffff"
+        )
+    textSelecExer.place(x=96,y=50)
+
+    img0 = PhotoImage(file = f"images/img9.png")
+    b0 = Button(
+        image = img0,
+        borderwidth = 0,
+        highlightthickness = 0,
+        command = lambda: btn_clicked_home(window),
+        relief = "flat")
+
+    b0.place(
+        x = 20, y = 20,
+        width = 28,
+        height = 28)
+
+    img1 = PhotoImage(file = f"images/img10.png")
+    b1 = Button(
+        image = img1,
+        borderwidth = 0,
+        highlightthickness = 0,
+        command = btn_clicked,
+        relief = "flat")
+
+    b1.place(
+        x = 19, y = 103,
+        width = 28,
+        height = 28)
+
+    img2 = PhotoImage(file = f"images/img11.png")
+    b2 = Button(
+        image = img2,
+        borderwidth = 0,
+        highlightthickness = 0,
+        command = btn_clicked,
+        relief = "flat")
+
+    b2.place(
+        x = 20, y = 184,
+        width = 27,
+        height = 27)
+
+    img3 = PhotoImage(file = f"images/img12.png")
+    b3 = Button(
+        image = img3,
+        borderwidth = 0,
+        highlightthickness = 0,
+        command = btn_clicked,
+        relief = "flat")
+
+    b3.place(
+        x = 7, y = 670,
+        width=45,
+        height=30)
+
+    img4 = PhotoImage(file = f"images/img13.png")
+    b4 = Button(
+        image = img4,
+        borderwidth = 0,
+        highlightthickness = 0,
+        command = btn_clicked_img13,
+        relief = "flat")
+
+    b4.place(
+        x = 500, y = 184,
+        width = 300,
+        height = 200)
+
+    img5 = PhotoImage(file = f"images/img14.png")
+    b5 = Button(
+        image = img5,
+        borderwidth = 0,
+        highlightthickness = 0,
+        command = btn_clicked_img14,
+        relief = "flat")
+
+    b5.place(
+        x = 114, y = 184,
+        width = 300,
+        height = 200)
+
+    img6 = PhotoImage(file = f"images/img15.png")
+    b6 = Button(
+        image = img6,
+        borderwidth = 0,
+        highlightthickness = 0,
+        command = btn_clicked_img15,
+        relief = "flat")
+
+    b6.place(
+        x = 886, y = 184,
+        width = 300,
+        height = 200)
+
+    img7 = PhotoImage(file = f"images/img7.png")
+    b7 = Button(
+        image = img7,
+        borderwidth = 0,
+        highlightthickness = 0,
+        command = btn_clicked_img7,
+        relief = "flat")
+
+    b7.place(
+        x = 114, y = 394,
+        width = 300,
+        height = 200)
+
+    img8 = PhotoImage(file = f"images/img8.png")
+    b8 = Button(
+        image = img8,
+        borderwidth = 0,
+        highlightthickness = 0,
+        command = btn_clicked_img8,
+        relief = "flat")
+
+    b8.place(
+        x = 500, y = 394,
+        width = 300,
+        height = 200)
+
+    botoes = [b0, b1, b2, b3, b4, b5, b6, b7, b8]
+
+    for botao in botoes:
+        botao.bind("<Enter>", destacar_botao)
+        botao.bind("<Leave>", remover_destaque_botao)
+
+    #window.resizable(False, False)
+    window.mainloop()
+
+def btn_clicked_img15():
+    exercise_type = "push-up"
+    root_value = "root_value"
+
+    inicio(exercise_type, root_value)
+
+def btn_clicked_img14():
+    exercise_type = "sit-up"
+    root_value = "root_value"
+
+    inicio(exercise_type, root_value)
+
+def btn_clicked_img13():
+    exercise_type = "squat"
+    root_value = "root_value"
+
+    inicio(exercise_type, root_value)
+
+def btn_clicked_img7():
+    exercise_type = "walk"
+    root_value = "root_value"
+
+    inicio(exercise_type, root_value)
+
+def btn_clicked_img8():
+    exercise_type = "pull-up"
+    root_value = "root_value"
+
+    inicio(exercise_type, root_value)
+
+def destacar_botao(event):
+    event.widget.config(bg="gray", cursor="hand2")
+
+def remover_destaque_botao(event):
+    event.widget.config(bg="SystemButtonFace", cursor="arrow")
+
+def inicio(exercise, root_value):
+    exercise_type = exercise
+    root = root_value
+    
+    using_webcam = True  # Fonte de vídeo é sempre webcam
+    track_pose(exercise_type, using_webcam, root)
+
+        # Inicie o rastreamento de vídeo em um thread separado
+    tracking_thread = threading.Thread(target=track_pose, args=(exercise_type, using_webcam, root))
+    tracking_thread.start()
 
 class BodyPartAngle:
     def __init__(self, landmarks):
@@ -74,7 +413,6 @@ class BodyPartAngle:
 
         return calculate_angle(shoulder_avg, hip_avg, knee_avg)
 
-
 def calculate_angle(a, b, c):
     a = np.array(a)  # First
     b = np.array(b)  # Mid
@@ -89,14 +427,12 @@ def calculate_angle(a, b, c):
 
     return angle
 
-
 def detection_body_part(landmarks, body_part_name):
     return [
         landmarks[mp_pose.PoseLandmark[body_part_name].value].x,
         landmarks[mp_pose.PoseLandmark[body_part_name].value].y,
         landmarks[mp_pose.PoseLandmark[body_part_name].value].visibility
     ]
-
 
 def detection_body_parts(landmarks):
     body_parts = pd.DataFrame(columns=["body_part", "x", "y"])
@@ -108,7 +444,6 @@ def detection_body_parts(landmarks):
 
     return body_parts
 
-
 def score_table(exercise, counter, status):
     score_table = cv2.imread("./images/score_table.png")
     cv2.putText(score_table, "Activity : " + exercise.replace("-", " "),
@@ -119,14 +454,6 @@ def score_table(exercise, counter, status):
     cv2.putText(score_table, "Status : " + str(status), (10, 135),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.7, (182, 158, 128), 2, cv2.LINE_AA)
     cv2.imshow("Score Table", score_table)
-
-
-class TypeOfExercise(BodyPartAngle):
-    def __init__(self, landmarks):
-        super().__init__(landmarks)
-
-    # (código da classe TypeOfExercise continua aqui...)
-
 
 class TypeOfExercise(BodyPartAngle):
         
@@ -299,17 +626,4 @@ def track_pose(exercise_type, video_source, root):
         cv2.destroyAllWindows()
         root.destroy()
 
-if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python main.py <exercise_type> <root>")
-        sys.exit(1)
-    
-    exercise_type = sys.argv[1]
-    root = sys.argv[2]
-    
-    using_webcam = True  # Fonte de vídeo é sempre webcam
-    track_pose(exercise_type, using_webcam, root)
-
-        # Inicie o rastreamento de vídeo em um thread separado
-    tracking_thread = threading.Thread(target=track_pose, args=(exercise_type, using_webcam, root))
-    tracking_thread.start()
+init(window)
