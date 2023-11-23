@@ -1,16 +1,21 @@
 
-# MindCode
-Projeto desenvolvido como parte da disciplina de PI4 na Universidade Federal Rural de Pernambuco, Unidade Acadêmica de Belo Jardim. Esta iniciativa visa oferecer uma abordagem ágil para instruir de maneira eficiente um recém-contratado sobre o código utilizado pela empresa, em contraste com treinamentos convencionais que costumam se prolongar por semanas. Destaca-se, ainda, a considerável redução de custos associada a essa abordagem, restrita ao investimento no software indispensável.
+# ShapeMotion
+Projeto elaborado como componente da disciplina PI3 na Universidade Federal Rural de Pernambuco, Unidade Acadêmica de Belo Jardim. Essa iniciativa tem como propósito proporcionar uma abordagem ágil para instruir de forma eficiente a prática de exercícios físicos. Vale ressaltar a simplicidade tanto na implementação quanto no uso do aplicativo, tornando-o acessível e amigável para os usuários.
+
 ## Autores
 
-- [@octokatherine](https://www.github.com/octokatherine)
+- [@FelipeBert](https://github.com/FelipeBert)
+- [@FelipePatriota](https://github.com/FelipePatriota)
+- [@Velky07](https://github.com/Velky07)
+- [@Mateuschagas12](https://github.com/Mateuschagas12)
+- [@Valdirjunior13](https://github.com/ValdirJunior13)
 
 
 ## Stack utilizada
 
-**Front-end:** React, Redux, TailwindCSS
+**Front-end:**
 
-**Back-end:** Node, Express
+**Back-end:** 
 
 
 # Roadmap
