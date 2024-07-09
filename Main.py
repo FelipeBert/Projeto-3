@@ -322,7 +322,7 @@ def btn_clicked_img13():
     inicio(exercise_type, root_value)
 
 def btn_clicked_img7():
-    exercise_type = "walk"
+    exercise_type = "burpee"
     root_value = "root_value"
 
     inicio(exercise_type, root_value)
@@ -536,7 +536,7 @@ class TypeOfExercise(BodyPartAngle):
         global color
         angle = self.angle_of_the_abdomen()
         if status:
-            if angle < 55:
+            if angle < 75:
                 counter += 1
                 color = (255, 0, 0)
                 status = False
@@ -544,6 +544,85 @@ class TypeOfExercise(BodyPartAngle):
             if angle > 105:
                 color = (0, 0, 255)
                 status = True
+
+        return [counter, status]
+
+    def jumping_jack(self, counter, status):
+        global color
+        leg_angle = self.angle_of_legs()
+        arm_angle = self.angle_of_arms()
+        
+        if status:
+            if leg_angle > 150 and arm_angle > 150:
+                counter += 1
+                color = (255, 0, 0)
+                status = False
+        else:
+            if leg_angle < 30 and arm_angle < 30:
+                color = (0, 0, 255)
+                status = True
+
+        return [counter, status]
+    
+    def lunge(self, counter, status):
+        global color
+        
+        left_leg_angle = self.angle_of_the_left_leg()
+        right_leg_angle = self.angle_of_the_right_leg()
+
+        if status:
+            if left_leg_angle < 100 and right_leg_angle < 100:
+                counter += 1
+                color = (255, 0, 0)
+                status = False
+        else:
+            if left_leg_angle > 160 and right_leg_angle > 160:
+                color = (0, 0, 255)
+                status = True
+
+        return [counter, status]
+    
+    def burpee(self, counter, status):
+        global color
+        
+        left_knee_angle = self.angle_of_the_left_leg()
+        right_knee_angle = self.angle_of_the_right_leg()
+        left_arm_angle = self.angle_of_the_left_arm()
+        right_arm_angle = self.angle_of_the_right_arm()
+
+        avg_knee_angle = (left_knee_angle + right_knee_angle) / 2
+        avg_arm_angle = (left_arm_angle + right_arm_angle) / 2
+
+        if status:  # Se está fazendo o burpee corretamente (na fase de salto)
+            if avg_knee_angle < 90 and avg_arm_angle > 160:  # Retorna ao agachamento
+                status = False
+                color = (255, 0, 0)
+        else:  # Se não está fazendo o burpee corretamente
+            if avg_knee_angle > 160 and avg_arm_angle > 160:  # Fase de salto
+                status = True
+                counter += 1
+                color = (0, 0, 255)
+        return [counter, status]
+    
+    def wall_sit(self, counter, status):
+        global color
+        
+        left_knee_angle = self.angle_of_the_left_leg()
+        right_knee_angle = self.angle_of_the_right_leg()
+
+        avg_knee_angle = (left_knee_angle + right_knee_angle) / 2
+
+        if status:
+            if 80 <= avg_knee_angle <= 100:  # Posição correta de Wall Sit (ângulo dos joelhos em torno de 90 graus)
+                color = (255, 0, 0)
+            else:
+                status = False
+                color = (255, 0, 0)
+        else:
+            if 80 <= avg_knee_angle <= 100:
+                counter += 1
+                status = True
+                color = (0, 0, 255)
 
         return [counter, status]
 
@@ -562,6 +641,18 @@ class TypeOfExercise(BodyPartAngle):
                 counter, status)
         elif exercise_type == "sit-up":
             counter, status = TypeOfExercise(self.landmarks).sit_up(
+                counter, status)
+        elif exercise_type == "jumping_jack":
+            counter, status = TypeOfExercise(self.landmarks).jumping_jack(
+                counter, status)
+        elif exercise_type == "lung":
+            counter, status = TypeOfExercise(self.landmarks).lunge(
+                counter, status)
+        elif exercise_type == "burpee":
+            counter, status = TypeOfExercise(self.landmarks).burpee(
+                counter, status)
+        elif exercise_type == "wall_sit":
+            counter, status = TypeOfExercise(self.landmarks).wall_sit(
                 counter, status)
 
         return [counter, status]
